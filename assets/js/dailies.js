@@ -22,7 +22,8 @@ class Dailies {
         if (setting.startsWith('rdo:dailies.'))
           delete localStorage[setting];
       }
-      localStorage.setItem('lastDailiesDate', dailiesDate);
+      // remove dailies date item from localstorage
+      // localStorage.setItem('lastDailiesDate', dailiesDate)
     }
 
     return Promise.all([currentDailies, allDailies])

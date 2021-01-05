@@ -72,7 +72,8 @@ class MadamNazar {
     if (Settings.isMarkerClusterEnabled)
       Layers.oms.addMarker(tempMarker);
 
-    this.onMap = this.onMap;
+    // hide madam nazar
+    //this.onMap = this.onMap;
   }
   static popupContent() {
     const $popup = $(`

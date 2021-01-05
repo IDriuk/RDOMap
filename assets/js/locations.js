@@ -24,8 +24,9 @@ class Location {
       .on('click', () => this.onMap = !this.onMap)
       .translate();
 
-    if (this.onMap)
-      this.layer.addTo(MapBase.map);
+    // hide location items
+    // if (this.onMap)
+    //   this.layer.addTo(MapBase.map);
   }
 
   onLanguageChanged() {
