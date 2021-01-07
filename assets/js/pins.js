@@ -230,10 +230,21 @@ class Pins {
       JSON.parse(doc.data().data).forEach(pinnedItem => {
         this.addPin(pinnedItem);
       });
+
+      fireDB.listen(doc => {
+        let pins = JSON.parse(doc.data().data)
+
+        this.layer.clearLayers();
+        this.pinsList = [];
+
+        pins.forEach(pinnedItem => {
+          this.addPin(pinnedItem, true);
+        });
+      })
     }
   }
 
-  static addPin(data) {
+  static addPin(data, disableSave) {
     const marker = new Pin(data);
     this.pinsList.push(marker);
 
@@ -261,7 +272,10 @@ class Pins {
     Pins.layer.addLayer(tempMarker);
     if (Settings.isMarkerClusterEnabled && !Settings.isPinsEditingEnabled)
       Layers.oms.addMarker(tempMarker);
-    Pins.save();
+
+    if (!disableSave) {
+      Pins.save();
+    }
   }
 
   static addPinToCenter() {

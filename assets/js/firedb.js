@@ -20,6 +20,7 @@ try {
 } catch (e) {
   console.log(' parse owner from url error ')
 }
+let isListening = false
 
 let db = firebase.firestore()
 var fireDB = {
@@ -38,5 +39,13 @@ var fireDB = {
     } catch (error) {
       console.error("Error loading user's pins", error)
     }
+  },
+  listen: async function (cb) {
+    if (isListening) return
+    isListening = true
+    db.collection('pins').doc(owner)
+      .onSnapshot(function(doc) {
+        cb(doc);
+      });
   }
 }
