@@ -181,9 +181,13 @@
   <script src="assets/js/lib/leaflet-heatmap.js"></script>
   <script src="assets/js/lib/oms.min.js"></script>
   <script src="assets/js/lib/rbush.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
   <script>var module = {};</script>
   <script src="assets/js/lib/leaflet.canvas-markers.js"></script>
   <script>module.exports(L);</script>
+  <script src="assets/js/firedb.js?nocache=1498"></script>
   <script src="assets/js/layers.js?nocache=1498"></script>
   <script src="assets/js/settings.js?nocache=1498"></script>
   <script src="assets/js/nazar.js?nocache=1498"></script>
@@ -207,46 +211,6 @@
   <script src="assets/js/dailies.js?nocache=1498"></script>
   <script src="assets/js/scripts.js?nocache=1498"></script>
   <script src="assets/js/fme.js?nocache=1498"></script>
-
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-
-  <script>
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-      apiKey: "AIzaSyCvF0ok_yBuRpPOXuZAmigjykjgK2LV2eU",
-      authDomain: "rdr2-42a04.firebaseapp.com",
-      projectId: "rdr2-42a04",
-      storageBucket: "rdr2-42a04.appspot.com",
-      messagingSenderId: "1040254241793",
-      appId: "1:1040254241793:web:3b6753a5da8ab8d4e94400",
-      measurementId: "G-0K3ZE0YCVB"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-
-    var db = firebase.firestore();
-
-    db.collection("users").add({
-        first: "Ada",
-        last: "Lovelace",
-        born: 1815
-    })
-    .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-    })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-    });
-
-  </script>
 
 </body>
 

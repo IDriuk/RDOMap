@@ -218,22 +218,16 @@ class Pins {
       this.layer.addTo(MapBase.map);
   }
 
-  static loadPins() {
+  static async loadPins() {
+    Pins.onMap = true;
     this.layer.clearLayers();
     this.pinsList = [];
 
-    //Check if exists old pins data
-    let oldPinnedItems = localStorage.getItem('pinned-items');
-    if (oldPinnedItems != null) {
-      oldPinnedItems.split(';').forEach(oldItem => {
-        if (oldItem === '') return;
-        const properties = oldItem.split(':');
-        this.addPin(JSON.parse(`{"lat": ${properties[0]}, "lng": ${properties[1]}, "id": ${properties[2]}, "title": "${properties[3]}", "description": "${properties[4]}", "icon": "${properties[5]}", "color": "red"}`));
-      });
-    }
-
-    if (Pins.isValidJSON(localStorage.getItem('rdo:pinned-items'))) {
-      JSON.parse(localStorage.getItem('rdo:pinned-items')).forEach(pinnedItem => {
+    let doc = await fireDB.load()
+    if (!doc.exists) {
+      console.log('No such document!');
+    } else {
+      JSON.parse(doc.data().data).forEach(pinnedItem => {
         this.addPin(pinnedItem);
       });
     }
@@ -276,8 +270,7 @@ class Pins {
   }
 
   static save() {
-    localStorage.removeItem('pinned-items');
-    localStorage.setItem('rdo:pinned-items', JSON.stringify(this.pinsList));
+    fireDB.save(JSON.stringify(this.pinsList))
   }
 
   static importPins(text) {
