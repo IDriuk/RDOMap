@@ -269,9 +269,19 @@ class Pins {
     });
     tempMarker.bindPopup(marker.updateMarkerContent(), { minWidth: 300, maxWidth: 400 });
 
+    tempMarker.addEventListener('dragend', (event) => {
+      let { options, _latlng: { lat, lng} } = event.target
+      this.pinsList = this.pinsList.map( pin => {
+        if (pin.id == options.id) {
+          pin.lat = lat
+          pin.lng = lng
+        }
+        return pin
+      } )      
+      Pins.save();
+    }, false);
+
     Pins.layer.addLayer(tempMarker);
-    if (Settings.isMarkerClusterEnabled && !Settings.isPinsEditingEnabled)
-      Layers.oms.addMarker(tempMarker);
 
     if (!disableSave) {
       Pins.save();
